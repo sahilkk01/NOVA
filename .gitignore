@@ -1,1 +1,26 @@
 
+
+# API keys and environment variables
+.env
+.env.*
+
+# Python virtual environments
+.venv/
+venv/
+venv313/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# VS Code settings
+.vscode/
+
+# Local database and user history
+nova.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Local environment files
+.python-version
