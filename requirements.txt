@@ -4,3 +4,4 @@ SpeechRecognition
 PyAudio
 groq
 python-dotenv
+gunicorn
