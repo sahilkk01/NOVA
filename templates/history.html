@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA - Conversation History</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 25px;
+            font-family: Arial, sans-serif;
+            background: #10131f;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            
+            
+
+        }
+
+        
+        h1 {
+            text-align: center;
+            color: #8be9fd;
+            margin-top: 90px;
+        }
+
+
+        
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 25px;
+    background: #10131f;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .home-btn {
+            background: #344563;
+        }
+
+        .clear-btn,
+        .delete-btn {
+            background: #d93650;
+        }
+
+        .conversation {
+            background: #1c2233;
+            border: 1px solid #343b50;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 18px;
+            overflow-wrap: anywhere;
+        }
+
+        .question {
+            color: #8be9fd;
+        }
+
+        .answer {
+            color: #e1e5ee;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .date {
+            color: #a5adc0;
+            font-size: 12px;
+        }
+
+        .delete-btn {
+            margin-top: 10px;
+        }
+
+        .empty {
+            text-align: center;
+            color: #a5adc0;
+            padding: 40px 10px;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 15px;
+            }
+
+            .top-bar {
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌌 NOVA Conversation History</h1>
+
+        <div class="top-bar">
+            <a href="/" class="btn home-btn">← Back to NOVA</a>
+
+            <form action="/clear_history" method="POST"
+                  onsubmit="return confirm('Delete ALL conversation history? This cannot be undone.');">
+                <button type="submit" class="btn clear-btn">
+                    Clear History
+                </button>
+            </form>
+        </div>
+
+        {% if conversations %}
+            {% for item in conversations %}
+                <div class="conversation">
+                    <p class="date">
+                        Conversation #{{ item[0] }} |
+                        {{ item[3] }}
+                    </p>
+
+                    <h3 class="question">You asked:</h3>
+                    <p>{{ item[1] }}</p>
+
+                    <h3 class="question">NOVA answered:</h3>
+                    <p class="answer">{{ item[2] }}</p>
+
+                    <form action="/delete_conversation/{{ item[0] }}"
+                          method="POST"
+                          onsubmit="return confirm('Delete this conversation?');">
+                        <button type="submit" class="btn delete-btn">
+                            Delete Conversation
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                <h2>No conversation history</h2>
+                <p>Ask NOVA something to start a conversation.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA - Voice Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header class="topbar">
+        <a class="logo" href="/">NOVA</a>
+        <a class="history-link" href="/history">History</a>
+    </header>
+
+    <main class="assistant">
+        <div class="orb" id="orb"></div>
+
+        <h1 id="greeting">Hello! I'm NOVA.</h1>
+        <p id="status">Your personal voice assistant</p>
+
+<div id="profileBox">
+    <input type="text" id="nameInput" placeholder="What should I call you?">
+    <button type="button" id="saveNameBtn">Save Name</button>
+</div>
+
+        <div class="controls">
+            <button id="startBtn" type="button">Start</button>
+            <button id="stopBtn" type="button">Stop</button>
+        </div>
+
+        <section class="conversation" aria-live="polite">
+            <p id="userMessage">Your question will appear here.</p>
+            <p id="assistantMessage">NOVA's answer will appear here.</p>
+            
+            <div class="speech-control">
+                <button type="button" id="muteBtn" aria-pressed="false">
+                    🔊 Mute Voice
+                </button>
+            </div>
+
+        </section>
+
+        <form id="messageForm">
+            <input
+                id="textInput"
+                type="text"
+                placeholder="Type your message..."
+                autocomplete="off">
+
+            <button type="submit">Send</button>
+        </form>
+    </main>
+
+    
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+<script src="{{ url_for('static', filename='js/voice.js') }}"></script>
+</body>
+</html>
